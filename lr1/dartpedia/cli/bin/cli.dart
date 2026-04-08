@@ -1,17 +1,18 @@
 import 'dart:io'; // Add this line at the top
 import 'package:http/http.dart' as http; // Add this line
 const version = '3.11.4'; // Add this line
+
 void main(List<String> arguments) {
   if (arguments.isEmpty || arguments.first == 'help') {
     printUsage();
   } else if (arguments.first == 'version') {
     print('Dartpedia CLI version $version');
-  } else if (arguments.first == 'search') {
-    // Add this new block:
+  } else if (arguments.first == 'wikipedia') { // Changed to 'wikipedia'
+    // Pass all arguments *after* 'wikipedia' to searchWikipedia
     final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
-    searchWikipedia(inputArgs);
+    searchWikipedia(inputArgs); // Call searchWikipedia (no 'await' needed here for main)
   } else {
-    printUsage();
+    printUsage(); // Catch all for any unrecognized command.
   }
 }
 
