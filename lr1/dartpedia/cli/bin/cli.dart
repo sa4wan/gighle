@@ -41,5 +41,9 @@ void printUsage() { // Add this new function
 }
 
 Future<String> getWikipediaArticle(String articleTitle) async {
-  //You'll add more code here soon
+  final url = Uri.https(
+    'en.wikipedia.org', // Wikipedia API domain
+    '/api/rest_v1/page/summary/$articleTitle', // API path for article summary
+  );
+  // ...
 }
