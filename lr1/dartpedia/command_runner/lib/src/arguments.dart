@@ -81,7 +81,7 @@ abstract class Command extends Argument {
       ),
     );
   }
-  
+
   // Add the following lines to the bottom of your Command class:
   FutureOr<Object?> run(ArgResults args);
 
@@ -125,5 +125,37 @@ class Option extends Argument {
     }
 
     return '--$name: $help';
+  }
+}
+
+// Add this class to the end of the file
+class ArgResults {
+  Command? command;
+  String? commandArg;
+  Map<Option, Object?> options = {};
+
+  // Returns true if the flag exists.
+  bool flag(String name) {
+    // Only check flags, because we're sure that flags are booleans.
+    for (var option in options.keys.where(
+      (option) => option.type == OptionType.flag,
+    )) {
+      if (option.name == name) {
+        return options[option] as bool;
+      }
+    }
+    return false;
+  }
+
+  bool hasOption(String name) {
+    return options.keys.any((option) => option.name == name);
+  }
+
+  ({Option option, Object? input}) getOption(String name) {
+    var mapEntry = options.entries.firstWhere(
+      (entry) => entry.key.name == name || entry.key.abbr == name,
+    );
+
+    return (option: mapEntry.key, input: mapEntry.value);
   }
 }
