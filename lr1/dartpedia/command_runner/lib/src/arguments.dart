@@ -14,6 +14,12 @@ abstract class Argument {
   String get usage;
 }
 
+// Add this class below the Option class
+abstract class Command extends Argument {
+  // Properties and methods will go here
+}
+
+
 class Option extends Argument {
   Option(
     this.name, {
