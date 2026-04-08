@@ -1,4 +1,5 @@
 import 'dart:io'; // Add this line at the top
+import 'package:http/http.dart' as http; // Add this line
 const version = '3.11.4'; // Add this line
 void main(List<String> arguments) {
   if (arguments.isEmpty || arguments.first == 'help') {
