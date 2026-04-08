@@ -5,7 +5,7 @@ import 'arguments.dart';
 import 'exceptions.dart'; // Add this line
 
 class CommandRunner {
-  CommandRunner({this.onError});
+  CommandRunner({this.onOutput, this.onError});
   
   
   final Map<String, Command> _commands = <String, Command>{};
