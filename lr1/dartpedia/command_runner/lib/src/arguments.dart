@@ -1,4 +1,6 @@
+import 'dart:collection'; // New import
 import '../command_runner.dart';
+
 
 enum OptionType { flag, option }
 
@@ -35,6 +37,13 @@ abstract class Command extends Argument {
 
   @override
   String? valueHelp;
+
+  // Add the following lines to the bottom of your Command class:
+
+  final List<Option> _options = [];
+
+  UnmodifiableSetView<Option> get options =>
+      UnmodifiableSetView(_options.toSet());
 }
 
 
