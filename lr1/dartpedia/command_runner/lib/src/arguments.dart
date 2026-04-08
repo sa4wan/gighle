@@ -1,3 +1,5 @@
+import '../command_runner.dart';
+
 enum OptionType { flag, option }
 
 // Paste this new class below the enum you added
