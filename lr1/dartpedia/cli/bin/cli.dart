@@ -6,3 +6,9 @@ void main(List<String> arguments) {
     print('Dartpedia CLI version $version');
   }
 }
+
+void printUsage() { // Add this new function
+  print(
+    "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'"
+  );
+}
