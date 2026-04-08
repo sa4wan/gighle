@@ -1,3 +1,4 @@
+import 'dart:async'; // New import
 import 'dart:collection'; // New import
 import '../command_runner.dart';
 
@@ -79,6 +80,14 @@ abstract class Command extends Argument {
         type: OptionType.option,
       ),
     );
+  }
+  
+  // Add the following lines to the bottom of your Command class:
+  FutureOr<Object?> run(ArgResults args);
+
+  @override
+  String get usage {
+    return '$name:  $description';
   }
 }
 
