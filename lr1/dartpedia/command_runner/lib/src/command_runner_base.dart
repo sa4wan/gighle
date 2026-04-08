@@ -1,20 +1,41 @@
+import 'dart:async'; // Add this line
 import 'dart:collection';
 import 'dart:io';
 import 'arguments.dart';
+import 'exceptions.dart'; // Add this line
 
 class CommandRunner {
+  CommandRunner({this.onError});
+
+  final Map<String, Command> _commands = <String, Command>{};
+
+  UnmodifiableSetView<Command> get commands =>
+      UnmodifiableSetView<Command>(<Command>{..._commands.values});
+
+  // Define the onError property.
+  FutureOr<void> Function(Object)? onError;
+  
   final Map<String, Command> _commands = <String, Command>{};
 
   UnmodifiableSetView<Command> get commands =>
       UnmodifiableSetView<Command>(<Command>{..._commands.values});
 
   Future<void> run(List<String> input) async {
+  // [Step 6 update] try/catch added
+  try {
     final ArgResults results = parse(input);
     if (results.command != null) {
       Object? output = await results.command!.run(results);
       print(output.toString());
     }
+  } on Exception catch (exception) {
+    if (onError != null) {
+      onError!(exception);
+    } else {
+      rethrow;
+    }
   }
+}
 
   void addCommand(Command command) {
     // TODO: handle error (Commands can't have names that conflict)
